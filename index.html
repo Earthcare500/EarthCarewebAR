@@ -4,9 +4,93 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebAR Foundation | VideoOverlay</title>
+    <style>
+      html {
+          box-sizing: border-box;
+      }
+
+      *,
+      *:before,
+      *:after {
+          box-sizing: inherit;
+      }
+
+      html,
+      body {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+      }
+
+      canvas {
+          display: block;
+      }
+
+      body {
+          margin: 0;
+      }
+
+      #unity-container {
+          width: 100%;
+          height: 100%;
+      }
+
+      #unity-canvas {
+          width: 100%;
+          height: 100%;
+          background: #231F20;
+      }
+      #unity-loading-bar {
+          flex: 1 1 auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          place-items: center;
+          width: 100%;
+          height: 100%;
+          background: rgb(18, 21, 21);
+      }
+
+      #unity-progress-bar-empty {
+          width: 80%;
+          height: 24px;
+          text-align: left;
+          border: 1px solid rgb(255, 255, 255);
+          position: absolute;
+          left: 10%;
+          top: 50%;
+      }
+
+      #unity-progress-bar-full {
+          width: 0%;
+          height: 100%;
+          background: rgb(0, 247, 255);
+      }
+
+      .light #unity-progress-bar-empty {
+          border-color: black;
+      }
+
+      .light #unity-progress-bar-full {
+          background: black;
+      }
+
+
+  </style>
+
   </head>
-  <body style="text-align: center; padding: 0; border: 0; margin: 0; overflow: hidden;">
-    <canvas id="unity-canvas" style="width: 100%; height: 100%; background: #231F20"></canvas>
+  <body >
+    <div id="unity-loading-bar">
+      <div id="unity-logo"></div>
+      <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+      </div>
+
+  </div>
+    <canvas id="unity-canvas"></canvas>
     <script src="Build/Build.loader.js"></script>
     <script>
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
@@ -36,18 +120,8 @@
         onResize();
       });
       onResize();
-
-      createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/Build.data",
-        frameworkUrl: "Build/Build.framework.js",
-        codeUrl: "Build/Build.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "VideoOverlay",
-        productVersion: "0.1",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
     </script>
+     <script src="Build/UnitySetup.js"></script>
+
   </body>
 </html>
